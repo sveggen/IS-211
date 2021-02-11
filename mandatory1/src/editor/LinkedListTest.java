@@ -50,3 +50,18 @@ public class LinkedListTest {
         System.out.println();
     }
 }
+
+class Node {
+    char character;
+    Node previous;
+    Node next;
+
+    public Node(char character) {
+        this.character = character;
+    }}
+
+    Node head, tail = null;
+
+    public void addNode(int item){
+        Node newNode = new Node(item);
+    }
