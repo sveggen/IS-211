@@ -16,6 +16,7 @@ import editor.display.CharacterDisplay;
  */
 
 public class Document {
+    DoublyLinkedList dll = new DoublyLinkedList();
 
     /** Document data structure(s) */
     // pointer to the
@@ -25,12 +26,21 @@ public class Document {
         // set up data structure
 
         this.display = display;
+
+        int i = 0;
+
+        while (i <= display.getWidth()) {
+            dll.add(' ');
+            i++;
+        }
     }
 
-    private void updateDisplay() {
-        // should be called at the end of the functionality
-        // and should update the display
-    }
+    // private void updateDisplay() {
+    // // should be called at the end of the functionality
+    // // and should update the display
+
+    // dll.printNodes();
+    // }
 
     /*
      * The following methods are called from the actions. Decide on the data
@@ -43,8 +53,8 @@ public class Document {
 
     public void insert(Character c) {
         // insert the character c into the data structure
-        DoublyLinkedList dll = new DoublyLinkedList();
-        dll.addNode(c);
+
+        dll.add(c);
 
         updateDisplay();
     }
@@ -62,15 +72,19 @@ public class Document {
 
     }
 
-    private void updateDisplay(int line) {
+    private void updateDisplay() {
         // for all visible characterso
         // show them in the rightplace
+        int line = 5;
         int column = 0;
         char c = 0;
-        display.displayChar(c, line, column);
+        display.displayChar('d', 2, column);
 
         // and make the cursor stand out a little
         display.displayCursor(c, line, column);
+
+        // print nodes
+        dll.printNodes();
     }
 
     public void print() {

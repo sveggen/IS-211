@@ -16,8 +16,21 @@ public class DoublyLinkedList {
 
   Node head, tail = null;
 
-  public void addNode(char character) {
+  public void add(char character) {
     Node newNode = new Node(character);
+
+    if (head == null) {
+      head = tail = newNode;
+      head.previous = null;
+
+      tail.next = null;
+    } else {
+
+      tail.next = newNode;
+      newNode.previous = tail;
+      tail = newNode;
+      tail.next = null;
+    }
   }
 
   public void removeNode(Node rem) {
@@ -45,11 +58,16 @@ public class DoublyLinkedList {
   public void printNodes() {
     Node temp = head;
 
-    while (temp.next != head) {
-      System.out.printf("%d ", temp.character);
+    if (head == null) {
+      System.out.println("empty");
+      return;
+    }
+    // System.out.println(temp.toString());
+    while (temp != null) {
+      // System.out.println(head.character + "Press next");
+      System.out.printf("%c", temp.character);
       temp = temp.next;
     }
-    System.out.printf("%d ", temp.character);
 
   }
 
