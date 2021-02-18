@@ -20,9 +20,9 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
 /**
- * This class represent some kind of old style terminal. It is capable
- * of displaying individual characters in a rectangular grid. It is
- * intended to be used as is. Just like a library class.
+ * This class represent some kind of old style terminal. It is capable of
+ * displaying individual characters in a rectangular grid. It is intended to be
+ * used as is. Just like a library class.
  *
  * @author evenal
  */
@@ -79,9 +79,9 @@ public class CharacterDisplay extends JPanel {
     }
 
     /**
-     * Display the character c, in position row,col in the grid. Use
-     * this method to display characters. To erase a character, call
-     * this method with a blank/space as c.
+     * Display the character c, in position row,col in the grid. Use this method to
+     * display characters. To erase a character, call this method with a blank/space
+     * as c.
      */
     public void displayChar(char c, int row, int col) {
         String s = String.format("%c", c);
@@ -95,17 +95,15 @@ public class CharacterDisplay extends JPanel {
 
     public void displayCursor(char c, int row, int col) {
         String s = String.format("%c|", c);
-        tableModel.setValueAt(s, row, col);
+        // tableModel.setValueAt(s, row, col);
         tableModel.setCursorAt(s, row, col);
         repaint();
     }
 
-    private static class CharacterRenderer
-            extends JLabel
-            implements TableCellRenderer {
+    private static class CharacterRenderer extends JLabel implements TableCellRenderer {
 
-        public static final Color CELLFG = Color.BLUE;
-        public static final Color CELLBG = Color.WHITE;
+        public static final Color CELLFG = Color.GREEN;
+        public static final Color CELLBG = Color.BLACK;
 
         public CharacterRenderer() {
             super();
@@ -113,17 +111,13 @@ public class CharacterDisplay extends JPanel {
 
         }
 
-        public Component getTableCellRendererComponent(
-                JTable table, Object value,
-                boolean selected, boolean focus,
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean selected, boolean focus,
                 int row, int col) {
-            DisplayTableModel model
-                    = (DisplayTableModel) table.getModel();
+            DisplayTableModel model = (DisplayTableModel) table.getModel();
             if (row == model.cursorRow && col == model.cursorCol) {
                 setBackground(CELLBG);
                 setForeground(CELLFG);
-            }
-            else {
+            } else {
                 setBackground(CELLBG);
                 setForeground(CELLFG);
             }
@@ -136,8 +130,7 @@ public class CharacterDisplay extends JPanel {
     }
 
     /**
-     * This class is the "glue" between your code and the actual UI
-     * code.
+     * This class is the "glue" between your code and the actual UI code.
      *
      */
     private class DisplayTableModel extends AbstractTableModel {
@@ -180,8 +173,8 @@ public class CharacterDisplay extends JPanel {
         }
 
         /**
-         * Get the character currently displayed at the position
-         * specified by row and col.
+         * Get the character currently displayed at the position specified by row and
+         * col.
          *
          * @param row
          * @param col
@@ -198,12 +191,11 @@ public class CharacterDisplay extends JPanel {
         }
 
         @Override
-        public void setValueAt(Object o, int row, int col)
-                throws IndexOutOfBoundsException {
+        public void setValueAt(Object o, int row, int col) throws IndexOutOfBoundsException {
             System.out.format("screen(%d,%d) <= %s\n", row, col, data);
             data[row][col] = (String) o;
             fireTableCellUpdated(row, col);
-//            repaint();
+            // repaint();
         }
 
         @Override
