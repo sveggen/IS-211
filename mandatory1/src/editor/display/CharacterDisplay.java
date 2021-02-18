@@ -95,15 +95,15 @@ public class CharacterDisplay extends JPanel {
 
     public void displayCursor(char c, int row, int col) {
         String s = String.format("%c|", c);
-        tableModel.setValueAt(s, row, col);
+        // tableModel.setValueAt(s, row, col);
         tableModel.setCursorAt(s, row, col);
         repaint();
     }
 
     private static class CharacterRenderer extends JLabel implements TableCellRenderer {
 
-        public static final Color CELLFG = Color.BLUE;
-        public static final Color CELLBG = Color.WHITE;
+        public static final Color CELLFG = Color.GREEN;
+        public static final Color CELLBG = Color.BLACK;
 
         public CharacterRenderer() {
             super();
