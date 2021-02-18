@@ -117,20 +117,8 @@ public class Editor extends JFrame {
             addKeyMapping(keyStroke, action);
         }
 
-        char ch;
-        for (ch = '\b'; ch <= 0; ch++) {
-            System.out.println(ch);
-            String name2 = "deleteChar";
-            EditorAction action2 = new DeleteAction(name2, this);
-            addKeyMapping(KeyStroke.getKeyStroke(ch), action);
 
-            if (ch == '\b') {
-                name2 = "deleteChar";
-                EditorAction actions = new DeleteAction(name, this);
-                addKeyMapping(KeyStroke.getKeyStroke(ch), actions);
-            }
-
-        }
+        addKeyMapping(KeyStroke.getKeyStroke(KeyEvent.VK_BACK_SPACE, 0), new DeleteAction("'\b'", this));
 
         addKeyMapping(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0), new ArrowKeyAction("UP", "moveCursor", this));
         addKeyMapping(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0), new ArrowKeyAction("DOWN", "moveCursor", this));

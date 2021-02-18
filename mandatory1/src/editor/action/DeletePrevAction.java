@@ -22,7 +22,6 @@ public class DeletePrevAction extends EditorAction {
     @Override
     public void actionPerformed(ActionEvent ae) {
         Document doc = editor.getDocument();
-        doc.deletePrev();
-        doc.print();
+        //doc.deletePrevious();
     }
 }

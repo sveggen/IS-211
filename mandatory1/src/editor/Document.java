@@ -26,9 +26,9 @@ public class Document {
     private int cursorCol;
 
     // Max allowed chars in a column (39)
-    private int maxCursorCols = CharacterDisplay.WIDTH - 1;
+    private final int maxCursorCols = CharacterDisplay.WIDTH - 1;
     // Max allowed rows (19)
-    private int maxCursorRows = CharacterDisplay.HEIGHT - 1;
+    private final int maxCursorRows = CharacterDisplay.HEIGHT - 1;
     // CusorColumnList
     LinkedList<Character> cCL = new LinkedList<>();
     // CusorRowList
@@ -138,7 +138,7 @@ public class Document {
         if (cursorCol == 0 && cursorRow == 0) {
 
         } else if (cursorCol == 0 && cursorRow >= 0) {
-            cursorCol = 39;
+            cursorCol = this.maxCursorCols;
             cursorRow--;
         } else {
             cursorCol--;
@@ -150,6 +150,7 @@ public class Document {
 
         return ' ';
     }
+
 
     public void moveCursor(String direction) {
         switch (direction) {
