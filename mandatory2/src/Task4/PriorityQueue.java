@@ -1,6 +1,6 @@
 package Task4;
 
-class Element  {
+class Element {
     private String name;
     private int priority;
 
@@ -21,7 +21,6 @@ class Element  {
     }
 }
 
-
 public class PriorityQueue {
 
     public Boolean addElement(Element e) {
@@ -29,12 +28,12 @@ public class PriorityQueue {
         return false;
     }
 
-    public Element getHighestPriorityElement(){
+    public Element getHighestPriorityElement() {
 
         return new Element();
     }
 
-    public Boolean printAllElementsInOrder(){
+    public Boolean printAllElementsInOrder() {
         return false;
     }
 }
