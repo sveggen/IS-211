@@ -2,47 +2,50 @@ package Task2;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.IntStream;
 
 public class ArraySearch {
 
-    public static void main(String[] args) {
+    private ArrayList<int[]> combinations;
+    ArrayList<Integer>startingNumbers = new ArrayList<>();
+    List<int[]> list = new int[]{4, 2, 7, 6, -3, -1, -2, 42, 0, -42, 9, -4, 5, -5, -6, -7, -8, -99, 42, 11, 20, 1, 2, 3};
 
-        ArraySearch arraySearch = new ArraySearch();
+    public ArraySearch() {
 
-        int listLength = 23;
-        int[] startingNumbers = new int[]{4, 2, 7, 6, -3, -1, -2, 42, 0, -42, 9, -4, 5, -5, -6, -7, -8, -99, 42, 11, 20, 1, 2, 3};
-        //task2.findAllCombinations(listLength, startingNumbers);
+        this.startingNumbers = [];
     }
 
-    private ArrayList<Integer> combinations;
+    public static void main(String[] args) {
+        ArraySearch arraySearch = new ArraySearch();
+        arraySearch.findAllCombinationsWithSumOfZero();
+    }
 
     public void findAllCombinationsWithSumOfZero() {
+        // find all subarrays that add up to 0 by calculating each subarray
+        ArraySearch arraySearch = new ArraySearch();
+        arraySearch.findAllConsecutiveArrays(0, startingNumbers);
 
 
     }
 
-    public void findAllCombinations(Integer a, int[] list) {
-        if (a == 1) {
-            System.out.println(Arrays.toString(list));
-        } else {
+    private boolean checkIfArrayHasSumOfZero(int[] list){
+         return IntStream.of(list).sum() == 0;
+    }
 
-            for (int i = 0; i < a; i += 1){
-                findAllCombinations(a - 1, list);
-                if (a % 2 == 1) {
-                    swapNumbers(list, 0, a-1);
-
-                } else {
-                    swapNumbers(list, i, a-1);
-                }
-            }
+    public void findAllConsecutiveArrays(int index, ArrayList<Integer> list) {
+        if (index == list.size()) {
+            return;
         }
 
-    }
+        ArrayList<Integer> subArray = new ArrayList<>();
 
-    private static void swapNumbers(int[] list, int a, int b) {
-        int tempNumber = list[a];
-        list[a] = list[b];
-        list[b] = tempNumber;
+        for (int i = index; i < list.size(); i++) {
+            subArray.add(list.get(i));
+            System.out.println(subArray);
+
+        }
+        findAllConsecutiveArrays(index+1, list);
     }
 
 
