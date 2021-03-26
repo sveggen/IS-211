@@ -1,18 +1,15 @@
 package Task2;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.Collections;
 import java.util.stream.IntStream;
 
 public class ArraySearch {
 
-    private ArrayList<int[]> combinations;
     ArrayList<Integer>startingNumbers = new ArrayList<>();
 
     public ArraySearch() {
-
-        4, 2, 7, 6, -3, -1, -2, 42, 0, -42, 9, -4, 5, -5, -6, -7, -8, -99, 42, 11, 20, 1, 2, 3
+        Collections.addAll(startingNumbers, 4, 2, 7, 6, -3, -1, -2, 42, 0, -42, 9, -4, 5, -5, -6, -7, -8, -99, 42, 11, 20, 1, 2, 3);
     }
 
     public static void main(String[] args) {
