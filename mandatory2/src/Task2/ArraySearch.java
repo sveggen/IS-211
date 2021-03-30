@@ -12,32 +12,33 @@ public class ArraySearch {
                 20, 1, 2, 3);
     }
 
+
     public static void main(String[] args) {
         ArraySearch arraySearch = new ArraySearch();
+
+        // Task 2A
         // arraySearch.findAllConsecutiveSubArrays(0, startingNumbers);
-        // 2B
+
+        // Task 2B
         // arraySearch.checkIfPairIsZero(startingNumbers);
 
-        // 2C
+        // Task 2C
         arraySearch.findIndexOfSmallestNumber(startingNumbers);
         arraySearch.findIndexOfBiggestNumber(startingNumbers);
 
     }
 
-    // 2A
-    // Check if array sum is zero, if it is print the
+    // Task 2A
     private boolean checkIfArrayHasSumOfZero(ArrayList<Integer> list) {
         int sum = 0;
         for (int i : list) {
             sum += i;
 
         }
-        if (sum == 0) {
-            return true;
-        }
-        return false;
+        return sum == 0;
     }
 
+    // Task 2A
     public void findAllConsecutiveSubArrays(int index, ArrayList<Integer> list) {
         if (index == list.size()) {
             return;
@@ -47,13 +48,14 @@ public class ArraySearch {
 
         for (int i = index; i < list.size(); i++) {
             subArray.add(list.get(i));
-            if (checkIfArrayHasSumOfZero(subArray) == true) {
+            if (checkIfArrayHasSumOfZero(subArray)) {
                 System.out.println(subArray);
             }
         }
         findAllConsecutiveSubArrays(index + 1, list);
     }
 
+    // Task 2B
     public void checkIfPairIsZero(ArrayList<Integer> list) {
 
         for (int i = 0; i < list.size(); i++) {
@@ -69,21 +71,9 @@ public class ArraySearch {
 
     }
 
-    public void addPairs(int a, int b) {
+    // Task 2B
+    public void printPair(int a, int b) {
         System.out.println(a + " " + b);
-    }
-
-    public void check2Num() {
-        var sum = 0;
-
-        for (int i = 0; i < startingNumbers.size(); i++) {
-            for (int j = 0; j < startingNumbers.size(); j++) {
-                if (j != i && (startingNumbers.indexOf(i)) + startingNumbers.indexOf(j) == sum) {
-                    addPairs(startingNumbers.indexOf(i), sum - startingNumbers.indexOf(j));
-                }
-            }
-        }
-
     }
 
     // Task 2C
@@ -96,7 +86,7 @@ public class ArraySearch {
                 index = i;
             }
         }
-        System.out.println(smallestNumber + " Index:" + (index + 1));
+        printNumberAndIndex(smallestNumber, index);
     }
 
     // Task 2C
@@ -109,7 +99,11 @@ public class ArraySearch {
                 index = i;
             }
         }
-        System.out.println(biggestNumber + " Index:" + (index + 1));
+        printNumberAndIndex(biggestNumber, index);
+    }
+
+    private void printNumberAndIndex(int number, int index){
+        System.out.println("Number:" + number + " Index:" + (index + 1));
     }
 
 }
