@@ -1,14 +1,18 @@
 package Task4;
 
 
-public class PriorityQueue {
+public class PriorityQueue<Element extends Comparable> {
 
     private final Element[] heap;
     private int curr;
 
     public PriorityQueue(int maxSize) {
-        this.heap = new Element[maxSize+1];
-        this.curr = 0;
+        //this.heap = new Element[maxSize+1];
+        heap = (Element[]) (new Comparable[maxSize+1]);
+        curr = 0;
+    }
+    private boolean less(int v, int w){
+        return (heap[v]).compareTo(heap[w]) > 0 ;
     }
 
     public boolean isEmpty(){
@@ -31,51 +35,78 @@ public class PriorityQueue {
         return (2 * pos) + 1;
     }
 
-    private boolean isLeaf(int pos) {
-        return pos >= (curr / 2) && pos <= curr;
-    }
-
     private void swap(int posA, int posB){
         Element temp = heap[posA];
         heap[posA] = heap[posB];
         heap[posB] = temp;
     }
 
-    private void swimUpStream(Element e){
-        int pos = e.priority;
 
-        while((pos > 1) && (pos < parent(pos))){
+    // good
+    private void swimUpStream(int pos){
+
+        while((pos > 1) && less(parent(pos), pos)){
             swap(parent(pos), pos);
             pos = parent(pos);
         }
     }
 
+
+
+    // good
     private void sinkDownStream(int pos){
+
         while (leftChild(pos) <= curr) {
-            int el = leftChild(pos);
-            if (leftChild(pos) < curr && leftChild(pos) < rightChild(pos)){
-                el++;
+
+            int lc = leftChild(pos);
+
+            // the greater child gets upped to parent
+            if ((lc < curr) && less(lc, rightChild(pos))){
+                lc++;
             }
-            if (pos > leftChild(pos)) {
-                swap(pos, el);
-                pos = el;
+            // if leftchild is larger than pos - break
+            if (less(lc, pos)) {
+                break;
             }
+            swap(pos, lc);
+            pos = lc;
         }
     }
 
+
+
+
+    //good
     public void insertElement(Element e){
-        System.out.println("Insert: " + e.name + " Priority: " + e.priority);
-        heap[++curr] = e;
+        heap[curr+1] = e;
         curr++;
-        swimUpStream(e);
+        swimUpStream(curr);
     }
 
-    public Element removeMaxElement(Element e){
+
+    // good
+    public Element removeMaxElement(){
         Element max = heap[1];
-        swap(1, curr--);
-        heap[curr+1] = null;
+        heap[1] = heap[curr];
+        heap[curr] = null;
+        curr--;
         sinkDownStream(1);
-        System.out.println("Max: " + max.name + " Priority: " + max.priority);
         return max;
+    }
+
+    public Element getHighestPriorityElement(){
+        return heap[1];
+    }
+
+
+    public Element[] returnAllElementsInOrder(){
+        int oldCurr = curr;
+        Element[] oldHeap = heap;
+        //Element[] tempHeap = (Element[]) (new Comparable[curr+1]);
+        for (int i = 1; i <= curr; i++){
+            Element maxElement = removeMaxElement();
+            oldHeap[i++] = maxElement;
+        };
+        return oldHeap;
     }
 }

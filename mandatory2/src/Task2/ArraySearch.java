@@ -1,32 +1,8 @@
 package Task2;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class ArraySearch {
-
-    static ArrayList<Integer> startingNumbers = new ArrayList<>();
-
-    public ArraySearch() {
-        Collections.addAll(startingNumbers, 4, 2, 7, 6, -3, -1, -2, 42, 0, -42, 9, -4, 5, -5, -6, -7, -8, -99, 42, 11,
-                20, 1, 2, 3);
-    }
-
-
-    public static void main(String[] args) {
-        ArraySearch arraySearch = new ArraySearch();
-
-        // Task 2A
-        // arraySearch.findAllConsecutiveSubArrays(0, startingNumbers);
-
-        // Task 2B
-        // arraySearch.checkIfPairIsZero(startingNumbers);
-
-        // Task 2C
-        arraySearch.findIndexOfSmallestNumber(startingNumbers);
-        arraySearch.findIndexOfBiggestNumber(startingNumbers);
-
-    }
 
     // Task 2A
     private boolean checkIfArrayHasSumOfZero(ArrayList<Integer> list) {
@@ -68,12 +44,6 @@ public class ArraySearch {
                 }
             }
         }
-
-    }
-
-    // Task 2B
-    public void printPair(int a, int b) {
-        System.out.println(a + " " + b);
     }
 
     // Task 2C
@@ -86,7 +56,7 @@ public class ArraySearch {
                 index = i;
             }
         }
-        printNumberAndIndex(smallestNumber, index);
+        System.out.println("Smallest number:" + smallestNumber + " Index:" + (index + 1));
     }
 
     // Task 2C
@@ -99,11 +69,6 @@ public class ArraySearch {
                 index = i;
             }
         }
-        printNumberAndIndex(biggestNumber, index);
+        System.out.println("Biggest number:" + biggestNumber + " Index:" + (index + 1));
     }
-
-    private void printNumberAndIndex(int number, int index){
-        System.out.println("Number:" + number + " Index:" + (index + 1));
-    }
-
 }
