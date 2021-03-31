@@ -22,7 +22,7 @@ public class Task2Client {
 
         System.out.println("-----TASK 2C-----");
         arraySearch.findIndexOfSmallestNumber(numbers);
-        arraySearch.findIndexOfBiggestNumber(numbers);
+        arraySearch.findIndexOfLargestNumber(numbers);
 
     }
 }

@@ -1,25 +1,23 @@
 package Task4;
 
 
+import java.util.ArrayList;
+
 public class PriorityQueue<Element extends Comparable> {
 
-    private final Element[] heap;
+    private Element[] heap;
     private int curr;
 
     public PriorityQueue(int maxSize) {
-        //this.heap = new Element[maxSize+1];
-        heap = (Element[]) (new Comparable[maxSize+1]);
+        heap = (Element[]) (new Comparable[maxSize + 1]);
         curr = 0;
     }
-    private boolean less(int v, int w){
-        return (heap[v]).compareTo(heap[w]) > 0 ;
+
+    private boolean less(int v, int w) {
+        return (heap[v]).compareTo(heap[w]) > 0;
     }
 
-    public boolean isEmpty(){
-        return curr == 0;
-    }
-
-    public int size(){
+    public int size() {
         return curr;
     }
 
@@ -35,36 +33,29 @@ public class PriorityQueue<Element extends Comparable> {
         return (2 * pos) + 1;
     }
 
-    private void swap(int posA, int posB){
+    private void swap(int posA, int posB) {
         Element temp = heap[posA];
         heap[posA] = heap[posB];
         heap[posB] = temp;
     }
 
+    private void swimUpStream(int pos) {
 
-    // good
-    private void swimUpStream(int pos){
-
-        while((pos > 1) && less(parent(pos), pos)){
+        while ((pos > 1) && less(parent(pos), pos)) {
             swap(parent(pos), pos);
             pos = parent(pos);
         }
     }
 
-
-
-    // good
-    private void sinkDownStream(int pos){
+    private void sinkDownStream(int pos) {
 
         while (leftChild(pos) <= curr) {
-
             int lc = leftChild(pos);
 
-            // the greater child gets upped to parent
-            if ((lc < curr) && less(lc, rightChild(pos))){
+            // switches places with the largest child
+            if ((lc < curr) && less(lc, rightChild(pos))) {
                 lc++;
             }
-            // if leftchild is larger than pos - break
             if (less(lc, pos)) {
                 break;
             }
@@ -73,19 +64,20 @@ public class PriorityQueue<Element extends Comparable> {
         }
     }
 
-
-
-
-    //good
-    public void insertElement(Element e){
-        heap[curr+1] = e;
-        curr++;
-        swimUpStream(curr);
+    public boolean addElement(Element e) {
+        try {
+            heap[curr + 1] = e;
+            curr++;
+            swimUpStream(curr);
+        } catch (Exception t) {
+            System.out.println("Element was NOT added");
+            return false;
+        }
+        System.out.println("Element was added");
+        return true;
     }
 
-
-    // good
-    public Element removeMaxElement(){
+    public Element removeMaxElement() {
         Element max = heap[1];
         heap[1] = heap[curr];
         heap[curr] = null;
@@ -94,19 +86,24 @@ public class PriorityQueue<Element extends Comparable> {
         return max;
     }
 
-    public Element getHighestPriorityElement(){
+    public Element getHighestPriorityElement() {
         return heap[1];
     }
 
-
-    public Element[] returnAllElementsInOrder(){
+    public ArrayList<Element> returnAllElementsInOrder() {
+        // creates a copy of current heap and curr field
         int oldCurr = curr;
         Element[] oldHeap = heap;
-        //Element[] tempHeap = (Element[]) (new Comparable[curr+1]);
-        for (int i = 1; i <= curr; i++){
+
+        ArrayList<Element> elements = new ArrayList<>();
+        for (int i = 1; i <= oldCurr; i++) {
             Element maxElement = removeMaxElement();
-            oldHeap[i++] = maxElement;
-        };
-        return oldHeap;
+            elements.add(maxElement);
+        }
+        // reassigns initial values
+        heap = oldHeap;
+        curr = oldCurr;
+
+        return elements;
     }
 }

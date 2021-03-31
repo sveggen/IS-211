@@ -6,7 +6,7 @@ public class StackQueue {
     private Node last;
     private int curr;
 
-    private boolean isEmpty(){
+    private boolean isEmpty() {
         return curr == 0;
     }
 
@@ -40,7 +40,7 @@ public class StackQueue {
         last.number = num;
         last.next = null;
 
-        if (isEmpty()){
+        if (isEmpty()) {
             first = last;
             last.prev = null;
         } else {
@@ -50,7 +50,7 @@ public class StackQueue {
         curr++;
     }
 
-    public void printList(){
+    public void printList() {
         if (isEmpty()) {
             System.out.println("The list is empty");
             return;

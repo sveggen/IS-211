@@ -1,18 +1,9 @@
 package Task2;
 
+
 import java.util.ArrayList;
 
 public class ArraySearch {
-
-    // Task 2A
-    private boolean checkIfArrayHasSumOfZero(ArrayList<Integer> list) {
-        int sum = 0;
-        for (int i : list) {
-            sum += i;
-
-        }
-        return sum == 0;
-    }
 
     // Task 2A
     public void findAllConsecutiveSubArrays(int index, ArrayList<Integer> list) {
@@ -31,6 +22,16 @@ public class ArraySearch {
         findAllConsecutiveSubArrays(index + 1, list);
     }
 
+    // Task 2A
+    private boolean checkIfArrayHasSumOfZero(ArrayList<Integer> list) {
+        int sum = 0;
+        for (int i : list) {
+            sum += i;
+
+        }
+        return sum == 0;
+    }
+
     // Task 2B
     public void checkIfPairIsZero(ArrayList<Integer> list) {
 
@@ -40,7 +41,7 @@ public class ArraySearch {
                 int int1 = list.get(i);
                 int int2 = list.get(j);
                 if (int1 + int2 == 0) {
-                    System.out.println(int1 + " " + int2);
+                    System.out.println(int1 + ", " + int2);
                 }
             }
         }
@@ -49,26 +50,26 @@ public class ArraySearch {
     // Task 2C
     public void findIndexOfSmallestNumber(ArrayList<Integer> list) {
         int smallestNumber = 0;
-        int index = 0;
+        int index = 1;
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i) < smallestNumber) {
                 smallestNumber = list.get(i);
                 index = i;
             }
         }
-        System.out.println("Smallest number:" + smallestNumber + " Index:" + (index + 1));
+        System.out.println("Smallest number: " + smallestNumber + " Index: " + (index + 1));
     }
 
     // Task 2C
-    public void findIndexOfBiggestNumber(ArrayList<Integer> list) {
-        int biggestNumber = 0;
-        int index = 0;
+    public void findIndexOfLargestNumber(ArrayList<Integer> list) {
+        int largestNumber = 0;
+        int index = 1;
         for (int i = 0; i < list.size(); i++) {
-            if (list.get(i) > biggestNumber) {
-                biggestNumber = list.get(i);
+            if (list.get(i) > largestNumber) {
+                largestNumber = list.get(i);
                 index = i;
             }
         }
-        System.out.println("Biggest number:" + biggestNumber + " Index:" + (index + 1));
+        System.out.println("Largest number: " + largestNumber + " Index: " + (index + 1));
     }
 }
