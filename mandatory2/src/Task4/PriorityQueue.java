@@ -44,8 +44,8 @@ public class PriorityQueue {
     private void swimUpStream(Element e){
         int pos = e.priority;
 
-        while(pos > 1 && pos > parent(pos)){
-            swap(pos, parent(pos));
+        while((pos > 1) && (pos < parent(pos))){
+            swap(parent(pos), pos);
             pos = parent(pos);
         }
     }
@@ -64,9 +64,10 @@ public class PriorityQueue {
     }
 
     public void insertElement(Element e){
-        heap[++curr] = e;
-        swimUpStream(e);
         System.out.println("Insert: " + e.name + " Priority: " + e.priority);
+        heap[++curr] = e;
+        curr++;
+        swimUpStream(e);
     }
 
     public Element removeMaxElement(Element e){
