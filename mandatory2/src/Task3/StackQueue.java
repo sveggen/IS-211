@@ -1,52 +1,68 @@
 package Task3;
 
-import java.util.ArrayList;
-
 public class StackQueue {
 
-    public static void main(String[] args) {
+    private Node first;
+    private Node last;
+    private int curr;
 
-        StackQueue stackQueue = new StackQueue();
+    private boolean isEmpty() {
+        return curr == 0;
+    }
 
-        // Push elements to Task3.StackQueue
-        for (int i = 0; i < 20; i++) {
-            stackQueue.push(i);
+    public Number stackPop() {
+        if (isEmpty())
+            return null;
+        int oldLast = last.number;
+        last = last.prev;
+        last.next = null;
+        curr--;
+
+        return oldLast;
+    }
+
+    // dequeue
+    public int queuePop() {
+        int firstNumber = first.number;
+        first = first.next;
+        if (isEmpty()) {
+            last = null;
         }
-        // Pop elements from Task3.StackQueue
-        stackQueue.stackPop();
-        stackQueue.queuePop();
-        stackQueue.stackPop();
-        stackQueue.stackPop();
-        stackQueue.queuePop();
-        stackQueue.printStackQueue();
+        curr--;
+
+        return firstNumber;
     }
 
+    // enqueue / push
+    public void push(int num) {
+        Node oldLast = last;
+        last = new Node();
+        last.number = num;
+        last.next = null;
 
-    ArrayList<Integer> elements;
-    private static int top;
-
-    public StackQueue() {
-        elements = new ArrayList<>();
-        top = -1;
-    }
-
-
-    public void stackPop() {
-
-    }
-
-    public void queuePop() {
-
-    }
-
-    public void push(int i) {
-        System.out.println("Pushing " + i);
-        elements.add(++top, i);
-    }
-
-    public void printStackQueue() {
-        for (int e : elements) {
-            System.out.println(e);
+        if (isEmpty()) {
+            first = last;
+            last.prev = null;
+        } else {
+            last.prev = oldLast;
+            oldLast.next = last;
         }
+        curr++;
+    }
+
+    public void printList() {
+        if (isEmpty()) {
+            System.out.println("The list is empty");
+            return;
+        }
+
+        Node temp = first;
+
+        System.out.println("-----Front of queue / bottom of stack-----");
+        while (temp != null) {
+            System.out.println(temp.number);
+            temp = temp.next;
+        }
+        System.out.println("-----Rear of queue / top of stack-----");
     }
 }

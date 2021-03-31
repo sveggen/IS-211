@@ -1,49 +1,75 @@
 package Task2;
 
+
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class ArraySearch {
 
-    public static void main(String[] args) {
+    // Task 2A
+    public void findAllConsecutiveSubArrays(int index, ArrayList<Integer> list) {
+        if (index == list.size()) {
+            return;
+        }
 
-        ArraySearch arraySearch = new ArraySearch();
+        ArrayList<Integer> subArray = new ArrayList<>();
 
-        int listLength = 23;
-        int[] startingNumbers = new int[]{4, 2, 7, 6, -3, -1, -2, 42, 0, -42, 9, -4, 5, -5, -6, -7, -8, -99, 42, 11, 20, 1, 2, 3};
-        //task2.findAllCombinations(listLength, startingNumbers);
+        for (int i = index; i < list.size(); i++) {
+            subArray.add(list.get(i));
+            if (checkIfArrayHasSumOfZero(subArray)) {
+                System.out.println(subArray);
+            }
+        }
+        findAllConsecutiveSubArrays(index + 1, list);
     }
 
-    private ArrayList<Integer> combinations;
+    // Task 2A
+    private boolean checkIfArrayHasSumOfZero(ArrayList<Integer> list) {
+        int sum = 0;
+        for (int i : list) {
+            sum += i;
 
-    public void findAllCombinationsWithSumOfZero() {
-
-
+        }
+        return sum == 0;
     }
 
-    public void findAllCombinations(Integer a, int[] list) {
-        if (a == 1) {
-            System.out.println(Arrays.toString(list));
-        } else {
+    // Task 2B
+    public void checkIfPairIsZero(ArrayList<Integer> list) {
 
-            for (int i = 0; i < a; i += 1){
-                findAllCombinations(a - 1, list);
-                if (a % 2 == 1) {
-                    swapNumbers(list, 0, a-1);
+        for (int i = 0; i < list.size(); i++) {
 
-                } else {
-                    swapNumbers(list, i, a-1);
+            for (int j = i + 1; j < list.size(); j++) {
+                int int1 = list.get(i);
+                int int2 = list.get(j);
+                if (int1 + int2 == 0) {
+                    System.out.println(int1 + ", " + int2);
                 }
             }
         }
-
     }
 
-    private static void swapNumbers(int[] list, int a, int b) {
-        int tempNumber = list[a];
-        list[a] = list[b];
-        list[b] = tempNumber;
+    // Task 2C
+    public void findIndexOfSmallestNumber(ArrayList<Integer> list) {
+        int smallestNumber = 0;
+        int index = 1;
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i) < smallestNumber) {
+                smallestNumber = list.get(i);
+                index = i;
+            }
+        }
+        System.out.println("Smallest number: " + smallestNumber + " Index: " + (index + 1));
     }
 
-
+    // Task 2C
+    public void findIndexOfLargestNumber(ArrayList<Integer> list) {
+        int largestNumber = 0;
+        int index = 1;
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i) > largestNumber) {
+                largestNumber = list.get(i);
+                index = i;
+            }
+        }
+        System.out.println("Largest number: " + largestNumber + " Index: " + (index + 1));
+    }
 }
